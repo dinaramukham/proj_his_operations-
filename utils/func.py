@@ -1,6 +1,3 @@
-#import json
-#with open('operations.json') as f:
-#    list_operat = json.load(f)
 def sort_operat(list):
     """
     сортирует, убирая невыполненные операции и операции без дат
@@ -54,28 +51,16 @@ def hide_check(str):
     return f"**{str[-4:]}"
 
 
-def print_info(list_date):
+def print_info(list_date, numb=5):
     a = ""
-    for num in range(5):
+    for num in range(numb):
 
         if "from" not in list_date[num]:
-            a+=(f"\n{data_str(list_date[num]['date'][:10])} {list_date[num]['description']} "
-                   f"\nотправитель  -> {info_from(list_date[num]['to'])} {hide_check(list_date[num]['to'].split()[-1])} "
-                   f"\n{list_date[num]['operationAmount']['amount']} {list_date[num]['operationAmount']['currency']['name']}\n")
+            a += (f"\n{data_str(list_date[num]['date'][:10])} {list_date[num]['description']} "
+                  f"\nотправитель  -> {info_from(list_date[num]['to'])} {hide_check(list_date[num]['to'].split()[-1])} "
+                  f"\n{list_date[num]['operationAmount']['amount']} {list_date[num]['operationAmount']['currency']['name']}\n")
         else:
-            a+=(f"\n{data_str(list_date[num]['date'][:10])} {list_date[num]['description']}"
-                   f"\n{info_from(list_date[num]['from'])} {hide_str(list_date[num]['from'].split()[-1])} -> {info_from(list_date[num]['to'])} {hide_check(list_date[num]['to'].split()[-1])}"
-                   f"\n{list_date[num]['operationAmount']['amount']} {list_date[num]['operationAmount']['currency']['name']}\n")
+            a += (f"\n{data_str(list_date[num]['date'][:10])} {list_date[num]['description']}"
+                  f"\n{info_from(list_date[num]['from'])} {hide_str(list_date[num]['from'].split()[-1])} -> {info_from(list_date[num]['to'])} {hide_check(list_date[num]['to'].split()[-1])}"
+                  f"\n{list_date[num]['operationAmount']['amount']} {list_date[num]['operationAmount']['currency']['name']}\n")
     return a
-def print_infomation(list_date):
-    for num in range(5):
-        print(f'\n{data_str(list_date[num]["date"][:10])} {list_date[num]["description"]}')
-        if "from" not in list_date[num]:
-            print("отправитель  ->", info_from(list_date[num]["to"]), hide_check(list_date[num]["to"].split()[-1]))
-            print(list_date[num]["operationAmount"]["amount"], list_date[num]["operationAmount"]["currency"]["name"])
-        else:
-            print(info_from(list_date[num]["from"]), hide_str(list_date[num]["from"].split()[-1]), "->",
-                  info_from(list_date[num]["to"]), hide_check(list_date[num]["to"].split()[-1]))
-            print(list_date[num]["operationAmount"]["amount"], list_date[num]["operationAmount"]["currency"]["name"])
-
-#print(print_info(sort_operat(list_operat ))[:11])

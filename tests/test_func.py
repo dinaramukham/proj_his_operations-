@@ -1,6 +1,8 @@
 import json
-from utils import func
+
 import pytest
+
+from utils import func
 
 
 @pytest.fixture
